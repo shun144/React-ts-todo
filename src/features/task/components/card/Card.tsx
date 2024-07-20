@@ -47,7 +47,7 @@ const Card = ({ id, title, content, isViewDrag }: Props) => {
         </div>
         :
         // ドラッグ中のタスクと同じIDのタスクはグレーで表示
-        id == activeId ?
+        id === activeId ?
           <div className={classes.shadowContainer} key={id}></div>
           :
           // ドラッグしていないタスクは通常表示

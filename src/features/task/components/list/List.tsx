@@ -5,8 +5,8 @@ import { SortableCard } from '../Index';
 import classes from './List.module.scss';
 import { FaPlus } from "react-icons/fa6";
 import { BsThreeDots } from "react-icons/bs";
-import { useContext, useState, useCallback, useEffect, useRef } from "react";
-import { addTask, ITask, deleteContainer} from '@/lib/db';
+import { useState } from "react";
+import { addTask, ITask} from '@/lib/db';
 import { useAppContext} from "@/contexts/AppContext";
 import ModalList from "../modal/ModalList";
 // import SubMenu from './SubMenu';
@@ -22,7 +22,7 @@ const List = ({containerId, tasks, label}: Props) => {
 
   const { setNodeRef } = useDroppable({id:containerId});
 
-  const {setTasks, setContainers} = useAppContext();
+  const {setTasks} = useAppContext();
   const [isOpenAdd, setIsOpenAdd] = useState<boolean>(false);
   const [addText, setAddText] = useState<string>('');
 

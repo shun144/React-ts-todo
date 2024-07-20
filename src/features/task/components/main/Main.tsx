@@ -48,6 +48,8 @@ const Main:FC = () => {
         
       }
     })();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
 
@@ -99,7 +101,7 @@ const Main:FC = () => {
       const oldTasks = prev.filter(x => x.containerId === oldContainerId);
       const newTasks = prev.filter(x => x.containerId === newContainerId);
   
-      const newTaskIdx = newTasks.findIndex(x => x.id == over.id);
+      const newTaskIdx = newTasks.findIndex(x => x.id === Number(over.id));
       const otherTasks = tasks.filter(x => x.containerId !== oldContainerId && x.containerId !== newContainerId);
       
       const dragTask = tasks.find(x => x.id === active.id);
@@ -151,7 +153,7 @@ const Main:FC = () => {
       const toContainerTasks = updQuery(dragged.toContainerId);  
       bulkUpdateTasks([...fromContainerTasks, ...toContainerTasks]);
     }
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[dragged]);
 
 
@@ -172,8 +174,8 @@ const Main:FC = () => {
     const dropContainerTasks = tasks.filter(x => x.containerId === newContainerId);
     const otherTasks = tasks.filter(x => x.containerId !== newContainerId);
 
-    const dragTaskIdx = dropContainerTasks.findIndex(x => x.id == active.id)
-    const dropTaskIdx = dropContainerTasks.findIndex(x => x.id == over.id);
+    const dragTaskIdx = dropContainerTasks.findIndex(x => x.id === Number(active.id))
+    const dropTaskIdx = dropContainerTasks.findIndex(x => x.id === Number(over.id));
 
     const movedTasks =  arrayMove(dropContainerTasks, dragTaskIdx, dropTaskIdx);
     

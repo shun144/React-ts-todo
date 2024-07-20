@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import Draggable from 'react-draggable';
+import React, { useEffect, useRef, useState } from 'react';
+// import Draggable from 'react-draggable';
 import classes from './ModalCard.module.scss';
 import { UniqueIdentifier} from "@dnd-kit/core";
 import { updateTask, deleteTask} from '@/lib/db';
@@ -50,6 +50,7 @@ const ModalCard = ({ taskId, defaultTitle, defaultContent, containerId, onClose,
       setTaskContent(contentRef.current);
     };
   },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   []);
 
 
