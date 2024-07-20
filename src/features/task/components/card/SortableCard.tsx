@@ -1,11 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { UniqueIdentifier,
-  KeyboardSensor,
-  MouseSensor,
-  useSensor,
-  useSensors,
- } from "@dnd-kit/core";
+import { UniqueIdentifier} from "@dnd-kit/core";
 import * as Task from '../Index';
 import { useState } from "react";
 import ModalCard from "../modal/ModalCard";

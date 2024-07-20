@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaRegTrashAlt } from "react-icons/fa";
 import { UniqueIdentifier } from "@dnd-kit/core";
 import classes from './Card.module.scss';

@@ -1,13 +1,12 @@
-import React, { FC,ReactNode, useEffect, useState , useLayoutEffect, useContext, useRef} from "react";
+import { FC,useEffect, useState} from "react";
 import * as Task from '../Index';
-
 import { getTaskAll, bulkUpdateTasks, ITask, addContainer, IContainer} from '@/lib/db';
 import {
   DndContext,
   DragOverlay,
   closestCorners,
-  KeyboardSensor,
-  PointerSensor,
+  // KeyboardSensor,
+  // PointerSensor,
   useSensor,
   useSensors,
   UniqueIdentifier,
@@ -16,7 +15,7 @@ import {
   DragEndEvent,
   MouseSensor,
 } from "@dnd-kit/core";
-import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
+import { arrayMove } from "@dnd-kit/sortable";
 import { useAppContext } from "@/contexts/AppContext";
 import classes from './Main.module.scss';
 
@@ -24,7 +23,7 @@ import classes from './Main.module.scss';
 const Main:FC = () => {
 
   // タスクstate（グローバル）
-  const {containers, setContainers, tasks, setTasks, isDragging, setIsDragging, activeId, setActiveId} = useAppContext();
+  const {containers, setContainers, tasks, setTasks, setIsDragging, activeId, setActiveId} = useAppContext();
 
   // const [activeId, setActiveId] = useState<UniqueIdentifier>();
   const [activeTask, setActiveTask] = useState<string>();
