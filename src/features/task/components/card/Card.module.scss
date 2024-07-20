@@ -1,0 +1,85 @@
+.container,
+.shadowContainer {
+  width: 100%;
+  min-height: 100px;
+  border-radius: 10px;
+  padding: 5px 10px;
+  user-select: none;
+}
+
+.container {
+  background: #ffffff;
+}
+
+.shadowContainer {
+  background: #666;
+}
+
+// .dragggingContainer {
+//   cursor:grabbing;
+//   opacity: 1;
+//   transform: rotate(15deg);
+// }
+
+
+.header {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 1.1rem;
+}
+
+.content {
+
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.deleteBtn {
+  padding: 2px 5px;
+
+  &:hover {
+    .icon {
+      opacity: 1;
+    }
+  }
+}
+
+.icon {
+  color:red;
+  opacity: 0.4;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+// .card {
+//   user-select: none;
+// }
+
+// .header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// }
+
+// .title {
+//   font-size: 1.2rem;
+// }
+
+// .status {
+//   color: blue;
+//   font-size: 14px;
+// }
+
+// .content {
+//   width: 100%;
+//   min-height: 50px;
+//   color: #666;
+// }
+
+
+
