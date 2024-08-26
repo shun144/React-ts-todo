@@ -18,13 +18,12 @@ const Card = ({ id, title, content, isViewDrag }: Props) => {
 
   const handlerDelete = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-
     if (window.confirm('このタスクを削除しますか？')) {
       setTasks(prev => {
         return [...prev].filter(x => x.id !== id)
       })
+      await deleteTask(Number(id));
     }
-    await deleteTask(Number(id));
   }
 
   return (
@@ -41,7 +40,7 @@ const Card = ({ id, title, content, isViewDrag }: Props) => {
         >
           <div className={classes.header}>
             <h4 className={classes.title}>{title}</h4>
-            <button className={classes.deleteBtn} onClick={handlerDelete}><FaRegTrashAlt className={classes.icon} /></button>
+            <button className={classes.deleteBtn} onClick={handlerDelete}><FaRegTrashAlt className={classes.icon}/></button>
           </div>
           <div className={classes.content}>{content}</div>
         </div>
@@ -51,7 +50,7 @@ const Card = ({ id, title, content, isViewDrag }: Props) => {
           <div className={classes.shadowContainer} key={id}></div>
           :
           // ドラッグしていないタスクは通常表示
-          <div className={classes.container} key={id}>
+          <div className={classes.container} key={id} style={{cursor:'grab'}}>
             <div className={classes.header}>
               <h4 className={classes.title}>{title}</h4>
               <button className={classes.deleteBtn} onClick={handlerDelete}><FaRegTrashAlt className={classes.icon} /></button>

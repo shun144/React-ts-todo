@@ -1,6 +1,7 @@
 .container,
 .shadowContainer {
-  width: 100%;
+  // width: 100%;
+  width: calc(100% - 20px);
   min-height: 100px;
   border-radius: 10px;
   padding: 5px 10px;
@@ -12,74 +13,69 @@
 }
 
 .shadowContainer {
-  background: #666;
+  background: #c4c4c4;
 }
-
-// .dragggingContainer {
-//   cursor:grabbing;
-//   opacity: 1;
-//   transform: rotate(15deg);
-// }
-
 
 .header {
   display:flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .title {
   font-size: 1.1rem;
+  margin: 0px;
+  white-space: nowrap; /* テキストを折り返さない */
+  overflow: hidden; /* コンテナを超えるテキストを非表示 */
+  text-overflow: ellipsis; /* 溢れたテキストに省略記号を表示 */
 }
 
 .content {
-
   color: #666;
   font-size: 0.9rem;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* 表示する行数を設定 */
+  overflow: hidden;
+  text-overflow: ellipsis; /* テキストが溢れた場合に省略記号を表示 */
+  height: calc(1.2em * 3); /* 行高に合わせた高さを設定 */
+  line-height: 1.2em; /* 行高を設定 */
+  word-wrap: break-word; /* 長い単語を折り返す */
+  overflow-wrap: break-word; /* 長い単語を折り返す */
+  word-break: break-all; /* 単語の途中で改行を許可する */
+  white-space: normal; /* テキストを折り返す */
 }
 
 .deleteBtn {
-  padding: 2px 5px;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  &:hover {
+    background-color: #ececec;
+  }
   &:hover {
     .icon {
-      opacity: 1;
+      color:#626f86;
     }
   }
 }
 
 .icon {
-  color:red;
-  opacity: 0.4;
+  color: #c9c9c9;
   font-size: 15px;
   transition: all 0.3s ease;
 }
-
-// .card {
-//   user-select: none;
-// }
-
-// .header {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-// }
-
-// .title {
-//   font-size: 1.2rem;
-// }
-
-// .status {
-//   color: blue;
-//   font-size: 14px;
-// }
-
-// .content {
-//   width: 100%;
-//   min-height: 50px;
-//   color: #666;
-// }
-
 
 

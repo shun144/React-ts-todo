@@ -10,26 +10,91 @@
   align-items: center;
 }
 
-.content {
-  background: white;
+.container {
+  background: #e7e7e7;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: relative;
-  min-height: 500px;
+  min-height: 450px;
   min-width: 500px;
+  width: 500px;
+  z-index: 1000;
 }
 
-.content input {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.taskTitle {
+  background: #0000;
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 20px;
+  font-weight: 600;
+  height: 32px;
+  line-height: 32px;
+  margin: -6px -10px;
+  min-height: 24px;
+  padding: 6px 10px;
+  resize: none;
+  border: none;
+  width: calc(100% - 40px);
+  white-space: nowrap; /* テキストを折り返さない */
+  overflow: hidden; /* コンテナを超えるテキストを非表示 */
+  text-overflow: ellipsis; /* 溢れたテキストに省略記号を表示 */
+
+  &:focus {
+    background:#fff;
+    border: 1px solid #0000;
+  }
+}
+
+.contentHead {
+  font-weight: 600;
+  color: #979797;
+  margin-bottom: 10px;
+}
+
+.taskContent {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 20px;
+  font-weight: 300;
+  height: 320px;
+  line-height: 32px;
+  // margin: -6px -10px;
+  min-height: 24px;
+  padding: 6px 10px;
+  resize: none;
+  border: 1px solid #b3b3b3;
+  width: calc(100% - 20px);
   display: block;
+  
+  // border: none;
+
+  // &:focus {
+  //   background:#fff;
+  //   border: 1px solid #0000;
+  // }
 }
 
-.button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+
+.btnAdd {
+  
+}
+
+.btnClose {
   background: none;
   border: none;
-  font-size: 16px;
+  font-size: 24px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
 }
+
+

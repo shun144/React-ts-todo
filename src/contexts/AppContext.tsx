@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import {UniqueIdentifier} from "@dnd-kit/core";
 import { IContainer, ITask } from '@/lib/db';
+
 type Props = {
   children: React.ReactNode
 }
@@ -28,6 +29,7 @@ const ContextInitialValue = {
 }
 
 const AppContext = createContext<ContextType>(ContextInitialValue);
+
 const AppProvider = ({children}:Props) => {
   
   const [containers, setContainers] = useState<IContainer[]>(ContextInitialValue.containers);

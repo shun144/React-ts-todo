@@ -1,12 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import classes from './ModalList.module.scss';
+import { RxCross2 } from "react-icons/rx";
+import {deleteContainer} from '@/lib/db';
+import { useAppContext } from '@/contexts/AppContext';
 
-interface ModalProps {
+
+interface Props {
+  containerId: number;
   isOpen: boolean;
   onClose: () => void;
 }
 
-const ModalList: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+const ModalList: React.FC<Props> = ({ containerId, isOpen, onClose }) => {
+
+  const {setContainers} = useAppContext();
+
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -33,12 +41,35 @@ const ModalList: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     };
   }, [isOpen, onClose]);
 
+
+
+  const handlerDelContainer = async(event:React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+
+    if (window.confirm('リストを削除するとタスクも削除されます。よろしいですか？'))
+    {
+      setContainers(prev => [...prev].filter(x => x.id !== containerId));
+      await deleteContainer(containerId);
+    }
+  }
+
   return (
     <div className={classes.overlay}>
-      <div ref={modalRef} className={classes.content}>
-        <p>モーダルの内容</p>
-        <button onClick={onClose}>閉じる</button>
+      <div ref={modalRef}  className={classes.container}>
+
+        <div className={classes.header}>
+          <div className={classes.headerTitle}>リスト操作</div>
+          <button onClick={onClose} className={classes.delBtn}><RxCross2/></button>
+        </div>
+        
+        <div className={classes.content}>
+          <ul>
+            <li><button onClick={handlerDelContainer}>リストの削除</button></li>
+          </ul>
+        </div>
       </div>
+
+
     </div>
   );
 };

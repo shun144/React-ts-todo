@@ -33,8 +33,7 @@ const SortableTaskCard = ({ id, title, content, containerId }: Props) => {
         {...listeners}
         style={{ 
           transform: CSS.Transform.toString(transform),
-          transition:transition,
-          // cursor: isDragging ? 'grabbing' : 'grab'
+          transition:transition
         }}
         onClick={openModal}
       >

@@ -1,13 +1,15 @@
-import './App.css';
-import {Main} from '@/features/task/components/Index';
+import * as Task from '@/features/task/components/Index';
 import { AppProvider } from '@/contexts/AppContext';
+import classes from './App.module.scss'
 
 function App() {
   return (
     <>
-      <AppProvider>
-        <Main/>
-      </AppProvider>
+      <main className={classes.container}>
+        <AppProvider>
+          <Task.Main/>
+        </AppProvider>
+      </main>
     </>
   );
 }

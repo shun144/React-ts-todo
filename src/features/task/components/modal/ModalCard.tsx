@@ -2,11 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 // import Draggable from 'react-draggable';
 import classes from './ModalCard.module.scss';
 import { UniqueIdentifier} from "@dnd-kit/core";
-import { updateTask, deleteTask} from '@/lib/db';
+import { updateTask} from '@/lib/db';
 import { RxCross2 } from "react-icons/rx";
-import { FaRegTrashAlt } from "react-icons/fa";
 import { useAppContext } from "@/contexts/AppContext";
-
 
 type Props = {
   taskId:UniqueIdentifier,
@@ -25,10 +23,10 @@ const ModalCard = ({ taskId, defaultTitle, defaultContent, containerId, onClose,
   const [modalTitle, setModalTitle] = useState(defaultTitle);
   const [modalContent, setModalContent] = useState(defaultContent);
 
+  const {setTasks} = useAppContext();
+
   const titleRef = useRef(modalTitle);
   const contentRef = useRef(modalContent);
-
-  const {setTasks} = useAppContext();
 
   useEffect(() => {
     titleRef.current = modalTitle;
@@ -48,31 +46,40 @@ const ModalCard = ({ taskId, defaultTitle, defaultContent, containerId, onClose,
 
       setTaskTitle(titleRef.current);
       setTaskContent(contentRef.current);
+      
+      setTasks(prev => {
+
+        return prev.map(x => x.id === Number(taskId) ? 
+        { 
+          ...x, 
+          title:titleRef.current,
+          content:contentRef.current,
+        }
+        : x)
+      });
     };
   },
   // eslint-disable-next-line react-hooks/exhaustive-deps
   []);
 
+  const handlerChangeTitle = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
+    setModalTitle(e.currentTarget.value);
+  };
 
-  const handerDelete = async(event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-
-    if (window.confirm('このタスクを削除しますか？')) {
-      setTasks(prev => {
-        return [...prev].filter(x => x.id !== taskId)
-      })
-    }
-    await deleteTask(Number(taskId));
-    onClose();
-  }
+  const handlerChangeContent = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
+    setModalContent(e.currentTarget.value);
+  };
+  
 
   return (
     <div className={classes.overlay} onClick={onClose}>       
-      <div className={classes.content} onClick={(e) => e.stopPropagation()}>
-        <button onClick={onClose} className={classes.button}><RxCross2/></button>
-        <button className={classes.deleteBtn} onClick={handerDelete}><FaRegTrashAlt className={classes.icon}/></button>    
-        <input type="text" value={modalTitle} onChange={evt => setModalTitle(evt.currentTarget.value)}/>
-        <input type="text" value={modalContent} onChange={evt => setModalContent(evt.currentTarget.value)}/>
+      <div className={classes.container} onClick={(e) => e.stopPropagation()}>
+        <div className={classes.header}>
+          <textarea value={modalTitle} onChange={handlerChangeTitle} className={classes.taskTitle} maxLength={30}/>
+          <button onClick={onClose} className={classes.btnClose}><RxCross2/></button>
+        </div>
+        <div className={classes.contentHead}>内容</div>
+        <textarea value={modalContent} onChange={handlerChangeContent} className={classes.taskContent} maxLength={100}/>
       </div>
     </div>
   );

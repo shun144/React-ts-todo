@@ -1,10 +1,13 @@
-import { FC,useEffect, useState} from "react";
+import { FC,useEffect, useState, useRef} from "react";
 import * as Task from '../Index';
 import { getTaskAll, bulkUpdateTasks, ITask, addContainer, IContainer} from '@/lib/db';
 import {
   DndContext,
   DragOverlay,
-  closestCorners,
+  // closestCorners,
+  rectIntersection,
+  closestCenter,
+  pointerWithin,
   // KeyboardSensor,
   // PointerSensor,
   useSensor,
@@ -14,13 +17,18 @@ import {
   DragOverEvent,
   DragEndEvent,
   MouseSensor,
+  // getClientRect,
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import { useAppContext } from "@/contexts/AppContext";
 import classes from './Main.module.scss';
+import { FaPlus } from "react-icons/fa6";
+import { RxCross2 } from "react-icons/rx";
 
 
 const Main:FC = () => {
+
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   // タスクstate（グローバル）
   const {containers, setContainers, tasks, setTasks, setIsDragging, activeId, setActiveId} = useAppContext();
@@ -72,13 +80,40 @@ const Main:FC = () => {
 
   // ドラッグ開始時に発火する関数
   const handleDragStart = (event: DragStartEvent) => {
-    const { active } = event;
+    const { active  } = event;
     if (!active.data.current) return
-    const dragTask = tasks.find(x => x.id === active.id);    
+    const dragTask = tasks.find(x => x.id === active.id);
     setActiveId(active.id);
     setActiveTask(dragTask!.title);
     setIsDragging(true);
   };
+
+  // // ドラッグ開始時に発火する関数
+  // const handleDragStart = (event: DragStartEvent) => {
+  //   const { active  } = event;
+  //   if (!active.data.current) return
+  //   const dragTask = tasks.find(x => x.id === active.id);
+  //   setActiveId(active.id);
+  //   setActiveTask(dragTask!.title);
+  //   setIsDragging(true);
+
+  //   console.log(active)
+
+
+  //   // const activeRect = document.querySelector('.test')!.getBoundingClientRect();
+
+  //   const handleMouseMove = (e: MouseEvent) => {
+  //     // const offsetX = e.clientX - activeRect.left;
+  //     // const offsetY = e.clientY - activeRect.top;
+
+  //     const offsetX = e.clientX;
+  //     const offsetY = e.clientY;
+
+  //     setOffset({ x: offsetX, y: offsetY });
+  //     window.removeEventListener('mousemove', handleMouseMove);
+  //   };
+  //   window.addEventListener('mousemove', handleMouseMove);
+  // };
 
 
 
@@ -197,6 +232,7 @@ const Main:FC = () => {
     setIsDragging(false);
     setActiveId(-1);
     setActiveTask('');
+    setOffset({ x: 0, y: 0 });
   };
 
   const [isAddList, setIsAddList] = useState(false);
@@ -222,12 +258,16 @@ const Main:FC = () => {
     setIsAddList(false);
   };
 
+
+
   return (
     <div className={classes.container}>
 
       <DndContext
         sensors={sensors}
-        collisionDetection={closestCorners}
+        // collisionDetection = {customCollisionDetection}
+        // collisionDetection={pointerWithin}
+        collisionDetection={closestCenter}
         onDragStart={handleDragStart}
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
@@ -236,23 +276,26 @@ const Main:FC = () => {
         {containers.length !== 0 && containers.map((container:IContainer) => {
           return <Task.List key={container.id} containerId={container.id!} tasks={tasks.filter(x => x.containerId === container.id)} label={container.name} />
         })}
-                
+
         {activeId && activeTask && 
-          <DragOverlay >
-            <Task.Card id={activeId} title={activeTask} isViewDrag={true}/>
+          <DragOverlay dropAnimation={null}>
+            <Task.Card id={activeId} title={activeTask} isViewDrag={true} />
           </DragOverlay>
         }
 
       </DndContext>
 
-      <button onClick={clickOpenAddList}>リストの追加</button>
-      {isAddList && (
-        <>
-          <input type="text" value={addListName} onChange={(evt)=> setAddListName(evt.currentTarget.value)}></input>
-          <button onClick={clickAddList}>登録</button>
-          <button onClick={clickCloseAddList}>x</button>
-        </>
-      )}
+      {!isAddList && <button onClick={clickOpenAddList} className={classes.btnAdd}> 
+        <FaPlus className={classes.icon}/>リストの追加
+      </button>}
+
+      {isAddList && <div className={classes.addArea}>
+        <textarea className={classes.txAdd} value={addListName} onChange={(e) => setAddListName(e.currentTarget.value)} placeholder="リスト名入力" maxLength={50}/>
+          <div className={classes.addBtnArea}>
+            <button className={classes.btnCommit} onClick={clickAddList}>リストの追加</button>
+            <button className={classes.btnClose} onClick={clickCloseAddList}><RxCross2/></button>
+          </div>
+      </div>}
     </div>
   );
 
