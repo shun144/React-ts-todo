@@ -1,13 +1,13 @@
-import { FC,useEffect, useState, useRef} from "react";
+import { FC,useEffect, useState} from "react";
 import * as Task from '../Index';
 import { getTaskAll, bulkUpdateTasks, ITask, addContainer, IContainer} from '@/lib/db';
 import {
   DndContext,
   DragOverlay,
   // closestCorners,
-  rectIntersection,
+  // rectIntersection,
   closestCenter,
-  pointerWithin,
+  // pointerWithin,
   // KeyboardSensor,
   // PointerSensor,
   useSensor,
@@ -28,7 +28,7 @@ import { RxCross2 } from "react-icons/rx";
 
 const Main:FC = () => {
 
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  // const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   // タスクstate（グローバル）
   const {containers, setContainers, tasks, setTasks, setIsDragging, activeId, setActiveId} = useAppContext();
@@ -232,7 +232,7 @@ const Main:FC = () => {
     setIsDragging(false);
     setActiveId(-1);
     setActiveTask('');
-    setOffset({ x: 0, y: 0 });
+    // setOffset({ x: 0, y: 0 });
   };
 
   const [isAddList, setIsAddList] = useState(false);
