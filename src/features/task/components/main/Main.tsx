@@ -60,6 +60,7 @@ const Main: FC = () => {
         setTasks(initialData.tasks);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

@@ -45,6 +45,7 @@ const List = ({ containerId, tasks, label }: Props) => {
       });
       setGoAnchor(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [goAnchor])
 
 
