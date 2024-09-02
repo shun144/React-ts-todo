@@ -65,7 +65,9 @@ const ModalList = ({ containerId, isOpen, onClose }: Props) => {
 
         <div className={classes.content}>
           <ul>
-            <li><button onClick={handlerDelContainer}>リストの削除</button></li>
+            <li>
+              <button onClick={handlerDelContainer}>リストの削除</button>
+            </li>
           </ul>
         </div>
       </div>

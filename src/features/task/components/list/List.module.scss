@@ -1,6 +1,6 @@
 .container {
   width: 400px;
-  height: 1000px;
+  height: 900px;
   min-height: 400px;
   background: #fff;
   border-radius: 5px;
@@ -46,30 +46,8 @@
       background: #fff;
       outline: none;
       border: none;
-      // outline: 0.5px solid #999;
-      // border: 0.5px solid #999;
     }
   }
-
-  // h3 {
-  //   color: #fff;
-  //   font-size: 20px;
-  //   font-weight: 600;
-  //   display: inline-block;
-  //   text-align: center;
-  //   margin: 0;
-  //   padding-left: 10px;
-
-  //   /* テキストを折り返さない */
-  //   white-space: nowrap;
-  //   /* コンテナを超えるテキストを非表示 */
-  //   overflow: hidden;
-  //   /* 溢れたテキストに省略記号を表示 */
-  //   text-overflow: ellipsis;
-
-  // }
-
-
 
 
   .btnArea {
@@ -93,7 +71,7 @@
 }
 
 .content {
-  max-height: 850px;
+  max-height: 750px;
   // max-height: calc(84% - 20px);
 
   // paddingとmargin分はみ出ないように調整

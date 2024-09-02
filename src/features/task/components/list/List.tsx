@@ -70,7 +70,7 @@ const List = ({ containerId, tasks, label }: Props) => {
     const addData = {
       title: addText,
       status: 'NotYet',
-      content: '-',
+      content: '',
       sortNo: tasks.length,
       containerId: containerId
     }
@@ -144,7 +144,11 @@ const List = ({ containerId, tasks, label }: Props) => {
             </button>
 
             {isSubMenuOpen &&
-              <ModalList containerId={containerId} isOpen={isSubMenuOpen} onClose={closeModal} />
+              <ModalList
+                containerId={containerId}
+                isOpen={isSubMenuOpen}
+                onClose={closeModal}
+              />
             }
           </div>
         </div>
