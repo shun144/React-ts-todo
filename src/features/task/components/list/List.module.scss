@@ -1,51 +1,113 @@
-$bg-color:#e2e2e2;
-
 .container {
-  width: 300px;
-  height: auto;
-  min-height: 150px;
-  background: $bg-color;
-  border-radius: 10px;
-  padding: 15px 10px;
+  width: 400px;
+  height: 1000px;
+  min-height: 400px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
 }
 
+
+// ヘッダー
 .header {
-  height: auto;
+  height: 50px;
+  min-height: 50px;
+  margin-bottom: 30px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  background-color: #17a2b8;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 
-  h3 {
-    color: rgb(23, 43, 77);
+  .containerTitle {
+    background: transparent;
+    color: #fff;
     font-size: 20px;
     font-weight: 600;
-    display: inline-block;
-    text-align: center;
-    margin: 0;
+    height: 32px;
+    line-height: 32px;
     padding-left: 10px;
+    margin: 6px 10px;
+    resize: none;
+    border: none;
+    width: calc(100% - 40px);
+
+    /* テキストを折り返さない */
+    white-space: nowrap;
+    /* コンテナを超えるテキストを非表示 */
+    overflow: hidden;
+    /* 溢れたテキストに省略記号を表示 */
+    text-overflow: ellipsis;
+
+    &:focus {
+      color: #666;
+      background: #fff;
+      outline: none;
+      border: none;
+      // outline: 0.5px solid #999;
+      // border: 0.5px solid #999;
+    }
   }
+
+  // h3 {
+  //   color: #fff;
+  //   font-size: 20px;
+  //   font-weight: 600;
+  //   display: inline-block;
+  //   text-align: center;
+  //   margin: 0;
+  //   padding-left: 10px;
+
+  //   /* テキストを折り返さない */
+  //   white-space: nowrap;
+  //   /* コンテナを超えるテキストを非表示 */
+  //   overflow: hidden;
+  //   /* 溢れたテキストに省略記号を表示 */
+  //   text-overflow: ellipsis;
+
+  // }
+
+
+
 
   .btnArea {
     position: relative;
+    margin-right: 5px;
 
     .btnSubmenu {
+      color: #fff;
       padding: 5px;
       border: none;
       border-radius: 5px;
-      background-color: $bg-color;
+      background-color: #17a2b8;
       transition: background-color 0.2s ease;
       cursor: pointer;
+
       &:hover {
-        background-color: #b6b6b6;
+        background-color: #24cce6;
       }
     }
   }
 }
 
 .content {
-  margin-bottom: 20px;
-  width: 100%;
+  max-height: 850px;
+  // max-height: calc(84% - 20px);
+
+  // paddingとmargin分はみ出ないように調整
+  width: calc(100% - 45px);
+  // width: 300px;
+
+  // スクロールバー分paddingを付与
+  padding-right: 30px;
+  margin-right: 5px;
+  margin-left: 10px;
+  // margin: 0px 5px 0px 10px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
 
   .card {
     margin-bottom: 20px;
@@ -57,77 +119,127 @@ $bg-color:#e2e2e2;
 }
 
 .footer {
+  // height: 55px;
+  // background-color: red;
+  margin: 20px 10px 0px;
+
+  .addTaskAreaDispBtn {
+    width: 100%;
+  }
 
   .btnAdd {
+    color: #666;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     background: transparent;
     font-size: 16px;
-    width: 100%;
-    padding: 10px 8px;
+    padding: 5px 8px;
     text-align: start;
-    vertical-align:middle;
-    &:hover {
-      background: #adadad;
+    vertical-align: middle;
+    width: 100%;
+    transition: color 0.25s, font-weight 0.25s;
+
+    .icon {
+      color: #999;
+      display: inline;
+      margin-right: 4px;
+      vertical-align: middle;
+      transition: color 0.25s, font-weight 0.25s;
     }
 
-  }
+    &:hover {
+      color: #17a2b8;
+      font-weight: 700;
 
-  .icon {
-    color:#666;
-    display: inline;
-    margin-right: 10px;
-    vertical-align:middle;
+      .icon {
+        color: #17a2b8;
+        font-weight: 900;
+      }
+    }
   }
+}
+
+
+// タスク追加入力エリア
+.addTaskArea {
+  width: 100%;
+  margin-top: 20px;
+  padding-bottom: 5px;
+  // padding: 10px;
 
   .txAdd {
-    width: calc(100% - 20px);
-    border-radius: 10px;
-    border: none;
-    padding: 5px 10px;
+    width: 100%;
+
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 4px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    background-color: #8aced82e;
+
+    padding: 0px 10px 0px 5px;
     resize: none;
+    line-height: 50px;
     height: 50px;
-    white-space: nowrap; /* テキストを折り返さない */
-    overflow: hidden; /* コンテナを超えるテキストを非表示 */
-    text-overflow: ellipsis; /* 溢れたテキストに省略記号を表示 */
-    font-size: 1.1rem;
+
+    font-size: 16px;
     font-weight: bold;
     color: #666;
+
+    overflow: hidden;
+
+    &:focus {
+      outline: 1px solid #17a2b8;
+    }
+
+    outline-offset: -1px;
+
+    &::placeholder {
+      color: #CCC;
+    }
+
+    /* テキストを折り返さない */
+    white-space: nowrap;
+
+    // テキストが溢れた際に「...」を表示
+    text-overflow: ellipsis;
+  }
+
+  .btnArea {
+    margin-top: 10px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    column-gap: 10px;
+  }
+
+  .btnCommit {
+    cursor: pointer;
+
+    color: #17a2b8;
+    background: #fff;
+    border: 1px solid #17a2b8;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: color 0.25s, background 0.25s, border 0.25s;
+
+    &:hover {
+      color: #fff;
+      background: #17a2b8;
+      border: none;
+    }
   }
 }
 
-.addBtnArea {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.btnCommit {
-  cursor: pointer;
-  background: #115582;
-  padding: 5px 10px;
-  border-radius: 4px;
-  border: none;
-  color: #fff;
-  transition: box-shadow .25s;
-  &:hover {
-    box-shadow: 5px 5px 4px #8a8a8a;
-  }
-}
 .btnClose {
   cursor: pointer;
   border: none;
   background: transparent;
   transition: all .2s;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
+
   &:hover {
-    background:  #bdbdbd;
+    background: #bdbdbd;
   }
 }
-
-
-
-

@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .container {
@@ -43,12 +44,15 @@
   resize: none;
   border: none;
   width: calc(100% - 40px);
-  white-space: nowrap; /* テキストを折り返さない */
-  overflow: hidden; /* コンテナを超えるテキストを非表示 */
-  text-overflow: ellipsis; /* 溢れたテキストに省略記号を表示 */
+  white-space: nowrap;
+  /* テキストを折り返さない */
+  overflow: hidden;
+  /* コンテナを超えるテキストを非表示 */
+  text-overflow: ellipsis;
+  /* 溢れたテキストに省略記号を表示 */
 
   &:focus {
-    background:#fff;
+    background: #fff;
     border: 1px solid #0000;
   }
 }
@@ -74,7 +78,7 @@
   border: 1px solid #b3b3b3;
   width: calc(100% - 20px);
   display: block;
-  
+
   // border: none;
 
   // &:focus {
@@ -84,9 +88,7 @@
 }
 
 
-.btnAdd {
-  
-}
+.btnAdd {}
 
 .btnClose {
   background: none;
@@ -96,5 +98,3 @@
   height: 32px;
   cursor: pointer;
 }
-
-

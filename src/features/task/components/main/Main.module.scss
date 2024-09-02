@@ -1,92 +1,135 @@
 .container {
-  width: 1500px;
-  height: 85vh;
-  margin: 2.5vh 0;
-  padding: 2.5vh 30px;
+  width: calc(400px*4 + 30px * 4);
+  height: 1050px;
+  min-height: 500px;
   display: flex;
-  background:green;
   justify-content: start;
   align-items: start;
-  column-gap: 10px;
- }
+  column-gap: 30px;
+  // margin-top: 5%;
+  // background-color: orange;
+}
 
- .btnAdd {
-  color:#fff;
+// リスト追加入力エリア表示ボタン
+.btnAdd {
+  color: #666;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   background: transparent;
   font-size: 16px;
-  width: auto;
-  padding: 10px 8px;
+  padding: 5px 8px;
   text-align: start;
-  vertical-align:middle;
+  vertical-align: middle;
+  display: inline-block;
+  transition: color 0.25s, font-weight 0.25s;
+
+  .icon {
+    color: #999;
+    display: inline;
+    margin-right: 4px;
+    vertical-align: middle;
+    transition: color 0.25s, font-weight 0.25s;
+  }
+
   &:hover {
-    background: #adadad;
+    color: #17a2b8;
+    font-weight: 700;
+
+    .icon {
+      color: #17a2b8;
+      font-weight: 900;
+    }
   }
 }
 
-.icon {
-  color:#fff;
-  display: inline;
-  margin-right: 10px;
-  vertical-align:middle;
-}
 
-
-
-.txAdd {
-  width: calc(100% - 20px);
-  border-radius: 10px;
-  border: none;
-  padding: 5px 10px;
-  resize: none;
-  height: 50px;
-  white-space: nowrap; /* テキストを折り返さない */
-  overflow: hidden; /* コンテナを超えるテキストを非表示 */
-  text-overflow: ellipsis; /* 溢れたテキストに省略記号を表示 */
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #666;
-}
-
-
-.addArea {
-  background: #e2e2e2;
+// リスト追加入力エリア
+.addListArea {
+  background: #8aced82e;
   padding: 15px;
   border-radius: 10px;
-  width: 250px;
-}
+  width: 300px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
 
-.addBtnArea {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  .txAdd {
+    width: calc(100% - 20px);
 
-.btnCommit {
-  cursor: pointer;
-  background: #115582;
-  padding: 5px 10px;
-  border-radius: 4px;
-  border: none;
-  color: #fff;
-  transition: box-shadow .25s;
-  &:hover {
-    box-shadow: 5px 5px 4px #8a8a8a;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 4px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    background-color: #fff;
+
+    padding: 0px 10px 0px 5px;
+    resize: none;
+    line-height: 50px;
+    height: 50px;
+
+    font-size: 16px;
+    font-weight: bold;
+    color: #666;
+
+    overflow: hidden;
+
+    &:focus {
+      outline: 1px solid #17a2b8;
+    }
+
+    outline-offset: -1px;
+
+    &::placeholder {
+      color: #CCC;
+    }
+
+    /* テキストを折り返さない */
+    white-space: nowrap;
+
+    // テキストが溢れた際に「...」を表示
+    text-overflow: ellipsis;
   }
-}
-.btnClose {
-cursor: pointer;
-border: none;
-background: transparent;
-transition: all .2s;
-width: 32px;
-height: 32px;
-&:hover {
-  background:  #bdbdbd;
-}
-}
 
 
+
+
+  .addBtnArea {
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    column-gap: 10px;
+  }
+
+  .btnCommit {
+    cursor: pointer;
+
+    color: #17a2b8;
+    background: #fff;
+    border: 1px solid #17a2b8;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: color 0.25s, background 0.25s, border 0.25s;
+
+    &:hover {
+      color: #fff;
+      background: #17a2b8;
+      border: none;
+    }
+  }
+
+  .btnClose {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: all .2s;
+    width: 32px;
+    height: 32px;
+
+    &:hover {
+      background: #bdbdbd;
+    }
+  }
+
+
+
+}

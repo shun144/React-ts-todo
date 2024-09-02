@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaRegTrashAlt } from "react-icons/fa";
 import { UniqueIdentifier } from "@dnd-kit/core";
 import classes from './Card.module.scss';
-import { useAppContext } from "@/contexts/AppContext";
+import { AppContext } from "@/contexts/AppContext";
 import { deleteTask } from '@/lib/db';
 
 type Props = {
@@ -12,9 +12,14 @@ type Props = {
   isViewDrag?: boolean
 }
 
+/**
+ * タスクカードコンポーネント
+ * @param param0 
+ * @returns 
+ */
 const Card = ({ id, title, content, isViewDrag }: Props) => {
 
-  const { setTasks, isDragging, activeId } = useAppContext();
+  const { setTasks, isDragging, activeId } = useContext(AppContext);
 
   const handlerDelete = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -40,7 +45,9 @@ const Card = ({ id, title, content, isViewDrag }: Props) => {
         >
           <div className={classes.header}>
             <h4 className={classes.title}>{title}</h4>
-            <button className={classes.deleteBtn} onClick={handlerDelete}><FaRegTrashAlt className={classes.icon}/></button>
+            <button className={classes.deleteBtn} onClick={handlerDelete}>
+              <FaRegTrashAlt className={classes.icon} />
+            </button>
           </div>
           <div className={classes.content}>{content}</div>
         </div>
@@ -50,7 +57,7 @@ const Card = ({ id, title, content, isViewDrag }: Props) => {
           <div className={classes.shadowContainer} key={id}></div>
           :
           // ドラッグしていないタスクは通常表示
-          <div className={classes.container} key={id} style={{cursor:'grab'}}>
+          <div className={classes.container} key={id} style={{ cursor: 'grab' }}>
             <div className={classes.header}>
               <h4 className={classes.title}>{title}</h4>
               <button className={classes.deleteBtn} onClick={handlerDelete}><FaRegTrashAlt className={classes.icon} /></button>

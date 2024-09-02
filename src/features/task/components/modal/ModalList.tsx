@@ -1,19 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import classes from './ModalList.module.scss';
 import { RxCross2 } from "react-icons/rx";
-import {deleteContainer} from '@/lib/db';
-import { useAppContext } from '@/contexts/AppContext';
+import { deleteContainer } from '@/lib/db';
+import { AppContext } from '@/contexts/AppContext';
 
 
-interface Props {
+type Props = {
   containerId: number;
   isOpen: boolean;
   onClose: () => void;
 }
 
-const ModalList: React.FC<Props> = ({ containerId, isOpen, onClose }) => {
+const ModalList = ({ containerId, isOpen, onClose }: Props) => {
 
-  const {setContainers} = useAppContext();
+  const { setContainers } = useContext(AppContext);
 
   const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -43,33 +43,32 @@ const ModalList: React.FC<Props> = ({ containerId, isOpen, onClose }) => {
 
 
 
-  const handlerDelContainer = async(event:React.MouseEvent<HTMLButtonElement>) => {
+  const handlerDelContainer = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
 
-    if (window.confirm('リストを削除するとタスクも削除されます。よろしいですか？'))
-    {
+    if (window.confirm('リストを削除するとタスクも削除されます。よろしいですか？')) {
       setContainers(prev => [...prev].filter(x => x.id !== containerId));
+
+      // DBからリストを削除
       await deleteContainer(containerId);
     }
   }
 
   return (
     <div className={classes.overlay}>
-      <div ref={modalRef}  className={classes.container}>
+      <div ref={modalRef} className={classes.container}>
 
         <div className={classes.header}>
           <div className={classes.headerTitle}>リスト操作</div>
-          <button onClick={onClose} className={classes.delBtn}><RxCross2/></button>
+          <button onClick={onClose} className={classes.delBtn}><RxCross2 /></button>
         </div>
-        
+
         <div className={classes.content}>
           <ul>
             <li><button onClick={handlerDelContainer}>リストの削除</button></li>
           </ul>
         </div>
       </div>
-
-
     </div>
   );
 };
